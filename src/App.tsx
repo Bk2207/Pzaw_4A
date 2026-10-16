@@ -3,6 +3,8 @@
 //   age?: string;
 // }
 
+import type React from "react";
+
 // function Greeter( {name = "Placeholder", age = "0"} : Props ){
   
 //   let tmp_age = Number(age);
@@ -12,15 +14,28 @@
 //   );
 // }
 
-interface Props{
-  Mtitle : string;
-  Myear : string;
-  Mimg_src : string;
-  Link_src? : string;
+interface MovieVars{
+  title: string;
+  year: string;
+  img_src: string;
+}
+
+interface AlbumVars{
+  title: string;
+  year: string;
+  img_src: string;
+  time: number;
+}
+
+interface BookVars{
+  title: string;
+  year: string;
+  img_src: string;
+  number: number;
 }
 
 const ImgStyle = {
-  width: "300px",
+  width: "400px",
   height: "500px",
 };
 
@@ -41,44 +56,141 @@ const flexBasis = {
   flexBasis: "50%",
 }
 
-function Poster( {Mtitle, Myear, Mimg_src, Link_src} : Props ){
-    if(typeof Link_src === 'undefined'){
+function Movie( {title, year, img_src} : MovieVars){
     return(
         <div style={flexBasis}>
-          <img src={Mimg_src} style={ImgStyle}/>
-          <h2>{Mtitle}</h2>
-          <p>{Myear}</p>
+          <img src={img_src} style={ImgStyle}/>
+          <h2>{title}</h2>
+          <p>{year}</p>
         </div>
       );
-    }else{
-      return(
-        <div style={flexBasis}>
-          <img src={Mimg_src} style={ImgStyle}/>
-          <h2>{Mtitle}</h2>
-          <p>{Myear}</p>
-          <a href={Link_src} target="_blank">Music video</a>
-        </div>
-      );
-    }
+}
+
+function Album( {title, year, img_src, time} : AlbumVars){
+  return(
+    <div style={flexBasis}>
+      <img src={img_src} style={ImgStyle}/>
+      <h2>{title}</h2>
+      <p>{year}</p>
+      <p>{time}</p>
+    </div>
+  );
+}
+
+function Book( {title, year, img_src, number } : BookVars){
+  return(
+    <div style={flexBasis}>
+      <img src={img_src} style={ImgStyle}/>
+      <h2>{title}</h2>
+      <p>{year}</p>
+      <p>{number}</p>
+    </div>
+  );
 }
 
 function App(){
+  const movies = [
+      {
+        Title: "Pięć Koszmarnych Nocy",
+        Year: "2023",
+        ImgSrc: "./public/fanfff.png"
+      },
+
+      {
+        Title: "Projekt Hail Merry",
+        Year: "2026",
+        ImgSrc: "./public/hail.png"
+      },
+
+      {
+        Title: "Żelazne płuco",
+        Year: "2025",
+        ImgSrc: "./public/lung.png"
+      }
+  ];
+
+  const albums = [
+    {
+      Title: "Underground",
+      Year: "1983",
+      ImgSrc: "./public/underground.png",
+      Time: 140
+    },
+
+    {
+      Title: "Butcher Vanity",
+      Year: "2024", 
+      ImgSrc: "./public/vanity.png",
+      Time: 220
+    },
+
+    {
+      Title: "Envy Baby",
+      Year: "2021",
+      ImgSrc: "./public/envy_baby.png",
+      Time: 180
+    },
+
+    {
+      Title: "Mage of Violet",
+      Year: "2021",
+      ImgSrc: "./public/mage_of_violet.png",
+      Time: 200
+    }
+  ];
+
+  const books = [
+    {
+      Title: "Lalka",
+      Year: "500",
+      ImgSrc: "./public/underground.png",
+      Number: 140
+    },
+
+    {
+      Title: "Antygona",
+      Year: "100", 
+      ImgSrc: "./public/vanity.png",
+      Number: 220
+    },
+
+    {
+      Title: "Tristan i Izolda",
+      Year: "2021",
+      ImgSrc: "./public/envy_baby.png",
+      Number: 180
+    },
+
+    {
+      Title: "Zbrodnia i Kara",
+      Year: "2021",
+      ImgSrc: "./public/mage_of_violet.png",
+      Number: 200
+    }
+  ];
 
   return (
-    <div style={flexStyleColumn}>
-      <div style={flexStyle}>
-        <Poster Mtitle="Pięć Koszmarnych Nocy" Myear="2023" Mimg_src="./public/fanfff.png" />
-        <Poster Mtitle="Projekt Hail Merry" Myear="2026" Mimg_src="./public/hail.png" />
-        <Poster Mtitle="Żelazne Płuco" Myear="2025" Mimg_src="./public/lung.png" />
-      </div>
+    <main>
+      <div style={flexStyleColumn}>
+        <h1>Filmy</h1>
+        
+        <section style={flexStyle}>
+          {movies.map(movie => <Movie title={movie.Title} year={movie.Year} img_src={movie.ImgSrc} />)};
+        </section>
 
-      <div style={flexStyle}>
-        <Poster Mtitle="Underground" Myear="1983" Mimg_src="./public/underground.png" Link_src="https://www.youtube.com/watch?v=vaTSQzYIR3U" />
-        <Poster Mtitle="Butcher Vanity" Myear="2024" Mimg_src="./public/vanity.png" Link_src="https://www.youtube.com/watch?v=vjBFftpQxxM" />
-        <Poster Mtitle="Mage of Violet" Myear="2021" Mimg_src="./public/mage_of_violet.png" Link_src="https://www.youtube.com/watch?v=pMNnZIz6YYM" />
-        <Poster Mtitle="Envy Baby" Myear="2021" Mimg_src="./public/envy_baby.png" Link_src="https://www.youtube.com/watch?v=eXIX5KSrbeI" />
+        <h1>Albumy</h1>
+        
+        <section style={flexStyle}>
+          {albums.map(album => <Album title={album.Title} year={album.Year} img_src={album.ImgSrc} time={album.Time} />)};
+        </section>
+
+        <h1>Books</h1>
+
+        <section style={flexStyle}>
+          {books.map(book => <Book title={book.Title} year={book.Year} img_src={book.ImgSrc} number={book.Number} />)}
+        </section>
       </div>
-    </div>
+    </main>
   );
 }
 
