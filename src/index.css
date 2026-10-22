@@ -109,3 +109,57 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+/* My custom styles */
+
+.ImgStyle{
+  width: 400px;
+  height: 500px;
+}
+
+.flexStyle{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.flexStyleColumn{
+  display: flex;
+  flex-direction: column;
+}
+
+.flexBasis{
+  flex-grow: 1;
+  flex-basis: 50%;
+  align-items: flex-end;
+}
+
+.distingushed{
+  font-style: italic;
+  color: gold;
+
+  height: 3vh;
+}
+
+.SectionDropdown{
+  display: flex;
+  justify-content: space-between;
+
+  height: 11vh;
+}
+
+.DropdownButton{
+  width: 11vh;
+  height: 11vh;
+
+  font-size: 100%;
+
+  background-color: transparent;
+  border: none;
+
+  margin-right: 1vw;
+}
+
+.DropdownButton:hover{
+  cursor: pointer;
+}
