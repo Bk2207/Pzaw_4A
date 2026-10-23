@@ -119,7 +119,7 @@ code {
 
 .flexStyle{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
@@ -137,8 +137,6 @@ code {
 .distingushed{
   font-style: italic;
   color: gold;
-
-  height: 3vh;
 }
 
 .SectionDropdown{

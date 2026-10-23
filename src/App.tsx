@@ -1,4 +1,5 @@
 import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface MovieVars{
   Title: string;
@@ -36,42 +37,46 @@ function findLongestTrack( array : any[] ){
 }
 
 function Movie( {Title, Year, Img_src, Rating} : MovieVars){
-    const Polecany = (Rating >= 8) ? "Polecany" : "";
+    const Polecany = (Rating >= 8) ? "Polecany" : "ㅤ";
     return(
-        <div className="flexBasis">
-          <h1 className="distingushed">{Polecany}</h1>
-            <img src={Img_src} className="ImgStyle"/>
-            <h2>{Title}</h2>
-            <p>{Year} <br/>
-            {Rating}/10</p>
+      <div className="col">
+        <h3 className="distingushed">{Polecany}</h3>
+        <div className="card flexBasis">
+          <img src={Img_src} className="card-img-top ImgStyle"/>
+          <h2 className="card-title">{Title}</h2>
+          <p className="card-text"> {Year} <br/>
+          {Rating}/10</p>
         </div>
+      </div>
       );
 }
 
 function Album( {Title, Year, Img_src, Time} : AlbumVars){
   const seconds = Time % 60;
-  const Dlugi = (Time > 180) ? "Długi utwór" : "";
+  const Dlugi = (Time > 180) ? "Długi utwór" : "ㅤ";
 
   return(
-    <div className="flexBasis">
-      <h1 className="distingushed">{Dlugi}</h1>
-      <img src={Img_src} className="ImgStyle"/>
-      <h2>{Title}</h2>
-      <p>{Year}</p>
-      <p>{(Time - seconds)/60}:{seconds < 10 ? "0" : "" }{seconds}</p>
+    <div className="col">
+      <h3 className="distingushed">{Dlugi}</h3>
+      <div className="card flexBasis">
+        <img src={Img_src} className="card-img-top ImgStyle"/>
+        <h2 className="card-title">{Title}</h2>
+        <p className="card-text">{Year} </p>
+        <p className="card-text"> {(Time - seconds)/60}:{seconds < 10 ? "0" : "" }{seconds}</p>
+      </div>
     </div>
   );
 }
 
 function Book( {Title, Year, Img_src, Time } : BookVars){
-  const Klasyk = (Year < 2000) ? "Klasyka" : "";
+  const Klasyk = (Year < 2000) ? "Klasyka" : "ㅤ";
   return(
-    <div className="flexBasis">
-      <h1 className="distingushed">{Klasyk}</h1>
-      <img src={Img_src} className="ImgStyle"/>
-      <h2>{Title}</h2>
-      <p>{Year}</p>
-      <p>{Time}</p>
+    <div className="col">
+      <h3 className="distingushed">{Klasyk}</h3>
+      <img src={Img_src} className="card-img-top ImgStyle"/>
+      <h2 className="card-title">{Title}</h2>
+      <p className="card-text">{Year} <br/>
+      {Time}</p>
     </div>
   );
 }
@@ -90,7 +95,7 @@ function PrintMovies(array : any[], title : string){
   return (
     <section className="flexStyleColumn">
       <div className="SectionDropdown"> <h1>{title}</h1> <input type="button" value={((isOpen) ? "⏷" : "⏵")} className="DropdownButton" onClick={ChangeIsOpenState}/> </div>
-      <section className="flexStyle">
+      <section className="row">
         { isOpen ? array.map(movie => <Movie Title={movie.Title} Year={movie.Year} Img_src={movie.ImgSrc} Rating={movie.Rating} />) : null}
       </section>
     </section>
@@ -109,7 +114,7 @@ function PrintBooks(array : any[], title : string){
   return (
     <section className="flexStyleColumn">
       <div className="SectionDropdown"> <h1>{title}</h1> <input type="button" value={((isOpen) ? "⏷" : "⏵")} className="DropdownButton" onClick={ChangeIsOpenState}/> </div>
-      <section className="flexStyle">
+      <section className="row">
         { isOpen ? array.map(book => <Book Title={book.Title} Year={book.Year} Img_src={book.ImgSrc} Time={book.Number} />) : null}
       </section>
     </section>
@@ -128,7 +133,7 @@ function PrintMusic(array : any[], title : string){
   return (
     <section className="flexStyleColumn">
       <div className="SectionDropdown"> <h1>{title}</h1> <input type="button" value={((isOpen) ? "⏷" : "⏵")} className="DropdownButton" onClick={ChangeIsOpenState}/> </div>
-      <section className="flexStyle">
+      <section className="row">
         { isOpen ? array.map(track => <Album Title={track.Title} Year={track.Year} Img_src={track.ImgSrc} Time={track.Time} />) : null}
       </section>
     </section>
@@ -228,7 +233,7 @@ function App(){
 
   return (
     <main>
-      <div className="flexStyleColumn">
+      <div className="container text-center">
         {PrintMovies(movies, "Filmy")}
 
         {PrintMusic(tracks, "Muzyka")}
